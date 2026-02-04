@@ -10,7 +10,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { supabase } from "@/lib/supabaseClient";
 import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { CHARITY_WALLET_ADDRESS, SOL_PRICE_USD } from "@/lib/constants";
+import { CHARITY_WALLET_ADDRESS, SOL_PRICE_USD, TOKEN_MINT_ADDRESS } from "@/lib/constants";
 
 export default function Dashboard() {
     const [mounted, setMounted] = useState(false);
@@ -24,6 +24,8 @@ export default function Dashboard() {
     const [activeTab, setActiveTab] = useState<'proposals' | 'donations'>('proposals');
     const [charityBalance, setCharityBalance] = useState<number>(0);
     const [solPrice, setSolPrice] = useState<number>(SOL_PRICE_USD);
+    const [userHoldings, setUserHoldings] = useState<number>(0);
+    const [isFetchingHoldings, setIsFetchingHoldings] = useState(false);
 
 
 
@@ -120,30 +122,50 @@ export default function Dashboard() {
         return () => { supabase.removeChannel(channel); }
     }, []);
 
-    // FETCH CHARITY WALLET BALANCE
+    // FETCH WALLET DATA (Charity Balance & User Holdings)
     useEffect(() => {
-        const fetchBalance = async () => {
-            if (!CHARITY_WALLET_ADDRESS) {
-                setCharityBalance(0);
-                return;
+        const fetchData = async () => {
+            const connection = new Connection(clusterApiUrl('mainnet-beta'));
+
+            // 1. Fetch Charity Balance
+            if (CHARITY_WALLET_ADDRESS) {
+                try {
+                    const balance = await connection.getBalance(new PublicKey(CHARITY_WALLET_ADDRESS));
+                    setCharityBalance(balance / LAMPORTS_PER_SOL);
+                } catch (err) {
+                    console.error("Failed to fetch charity balance:", err);
+                }
             }
 
-            try {
-                const connection = new Connection(clusterApiUrl('mainnet-beta'));
-                const balance = await connection.getBalance(new PublicKey(CHARITY_WALLET_ADDRESS));
-                setCharityBalance(balance / LAMPORTS_PER_SOL);
+            // 2. Fetch User Token Holdings
+            if (publicKey && TOKEN_MINT_ADDRESS) {
+                setIsFetchingHoldings(true);
+                try {
+                    const response = await connection.getParsedTokenAccountsByOwner(
+                        publicKey,
+                        { mint: new PublicKey(TOKEN_MINT_ADDRESS) }
+                    );
 
-                // Optional: Fetch real SOL price from CoinGecko or Similar
-                // For now use the constant from lib/constants.ts
-            } catch (err) {
-                console.error("Failed to fetch balance:", err);
+                    if (response.value.length > 0) {
+                        const amount = response.value[0].account.data.parsed.info.tokenAmount.uiAmount;
+                        setUserHoldings(amount || 0);
+                    } else {
+                        setUserHoldings(0);
+                    }
+                } catch (err) {
+                    console.error("Failed to fetch token holdings:", err);
+                } finally {
+                    setIsFetchingHoldings(false);
+                }
+            } else if (!publicKey) {
+                setUserHoldings(0);
             }
         };
 
-        fetchBalance();
-        const interval = setInterval(fetchBalance, 30000); // Update every 30s
+        fetchData();
+        const interval = setInterval(fetchData, 30000); // Update every 30s
         return () => clearInterval(interval);
-    }, []);
+    }, [publicKey]);
 
     // Load voting state from local storage on mount
 
@@ -246,7 +268,9 @@ export default function Dashboard() {
                     <div className="lg:col-span-1 space-y-6">
                         <div className="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm transition-all hover:border-mint-500/30">
                             <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Your Holdings</p>
-                            <p className="text-2xl font-bold mt-2 text-zinc-900">{connected ? "12,500" : "0"} GIVE</p>
+                            <p className="text-2xl font-bold mt-2 text-zinc-900">
+                                {connected ? (isFetchingHoldings ? "..." : userHoldings.toLocaleString()) : "0"} GIVE
+                            </p>
                             <div className="mt-4 pt-4 border-t border-zinc-100">
                                 <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Active Voters</p>
                                 <p className="text-xl font-bold text-mint-600 mt-1">
