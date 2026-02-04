@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Heart, TrendingUp, CheckCircle2, ShieldPlus, Home, X } from "lucide-react";
+import { Heart, TrendingUp, CheckCircle2, ShieldPlus, Home, X as XIcon, Twitter, MessageCircle, PlusCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -297,6 +297,37 @@ export default function Dashboard() {
                                 <p className="text-xs text-zinc-500 mt-1">≈ ${(charityBalance * solPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD</p>
                             )}
                         </div>
+
+                        {/* Latest News / Tweet */}
+                        <div className="p-6 rounded-2xl bg-white/40 backdrop-blur-md border border-zinc-200 shadow-sm">
+                            <div className="flex items-center gap-2 mb-4">
+                                <Twitter className="h-4 w-4 text-blue-400" />
+                                <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Latest News</p>
+                            </div>
+                            <a
+                                href="https://x.com/Givepump/status/2019085498715623567"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block group"
+                            >
+                                <p className="text-sm text-zinc-600 line-clamp-3 group-hover:text-zinc-900 transition-colors">
+                                    "Making real-world impact one trade at a time. Community-led, decentralized, and 100% transparent. Join the movement..."
+                                </p>
+                                <div className="mt-3 flex items-center gap-2 text-xs text-blue-500 font-bold group-hover:underline">
+                                    View on X <Twitter size={10} />
+                                </div>
+                            </a>
+                        </div>
+
+                        {/* Suggest Charity */}
+                        <div className="p-6 rounded-2xl bg-mint-500/10 backdrop-blur-md border border-mint-500/20 shadow-sm group hover:border-mint-500/40 transition-all cursor-pointer" onClick={() => window.location.href = '/submit-request'}>
+                            <div className="flex items-center justify-between mb-2">
+                                <PlusCircle className="h-5 w-5 text-mint-600" />
+                                <p className="text-mint-600 text-[10px] uppercase tracking-widest font-black">Community</p>
+                            </div>
+                            <h4 className="text-sm font-bold text-zinc-900">Suggest a Charity</h4>
+                            <p className="text-xs text-zinc-500 mt-1 leading-relaxed">Know a cause that needs help? Submit a request to the community board.</p>
+                        </div>
                     </div>
 
                     {/* Content Area */}
@@ -425,7 +456,7 @@ export default function Dashboard() {
                                 onClick={e => e.stopPropagation()}
                             >
                                 {/* Close Button */}
-                                <button onClick={() => setSelectedProposal(null)} className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-zinc-600 rounded-full hover:bg-zinc-100 transition"><X size={20} /></button>
+                                <button onClick={() => setSelectedProposal(null)} className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-zinc-600 rounded-full hover:bg-zinc-100 transition"><XIcon size={20} /></button>
 
                                 {/* Header */}
                                 <div className="flex items-start gap-6 mb-6">
