@@ -411,18 +411,7 @@ export default function Dashboard() {
                                             </div>
                                         </div>
 
-                                        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-                                            <div className="flex items-center gap-3">
-                                                <div className="flex -space-x-2">
-                                                    {[1, 2, 3].map((i) => (
-                                                        <div key={i} className="h-8 w-8 rounded-full border-2 border-white bg-zinc-200 flex items-center justify-center text-[10px] font-bold text-zinc-500">
-                                                            P
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                                <span className="text-xs font-bold text-zinc-400">Join {Math.floor(proposal.votes / 10)} other donors</span>
-                                            </div>
-
+                                        <div className="mt-8 flex flex-col sm:flex-row items-center justify-end gap-6">
                                             <div className="flex gap-4 w-full sm:w-auto">
                                                 <button
                                                     onClick={() => setSelectedProposal(proposal)}
