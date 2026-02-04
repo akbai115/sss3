@@ -197,7 +197,7 @@ export default function SubmitRequest() {
                                         </div>
                                         <h2 className="text-3xl font-black">Request Received!</h2>
                                         <p className="text-zinc-500 leading-relaxed max-w-sm mx-auto">
-                                            Your story is in our hands now. We're performing a quick vibe check to ensure everything is legit—check the dashboard soon to see if you've hit the community board!
+                                            Your story is in our hands now. We're performing a quick vibe check to ensure everything is legit—check The Hub soon to see if you've hit the community board!
                                         </p>
                                         <button
                                             onClick={() => setIsSuccess(false)}

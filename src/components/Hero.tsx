@@ -122,7 +122,7 @@ export default function Hero() {
                             onClick={handleConnect}
                             className="group relative flex items-center gap-3 overflow-hidden rounded-full bg-mint-500 px-8 py-4 text-base font-bold text-white transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(0,255,204,0.4)] cursor-pointer"
                         >
-                            <span className="relative z-10">{connected ? 'Launch Dashboard' : 'Join the Vote'}</span>
+                            <span className="relative z-10">{connected ? 'Enter The Hub' : 'Join the Vote'}</span>
                             <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0" />
                         </button>
                         <Link href="/submit-request" className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-8 py-4 text-base font-semibold text-zinc-700 transition hover:bg-zinc-50 hover:border-mint-500/50 cursor-pointer shadow-sm">

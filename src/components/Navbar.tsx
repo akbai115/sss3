@@ -39,10 +39,9 @@ export default function Navbar() {
 
             <div className="hidden items-center gap-1 md:flex">
                 {[
-                    { name: 'Vote', href: '/dashboard' },
-                    { name: 'Dashboard', href: '/dashboard' },
-                    { name: 'Request', href: '/submit-request' },
-                    { name: 'Transparency', href: '/' }
+                    { name: 'The Hub', href: '/dashboard' },
+                    { name: 'Ask', href: '/submit-request' },
+                    { name: 'Stats', href: '/' }
                 ].map((item) => (
                     <Link
                         key={item.name}
