@@ -18,8 +18,14 @@ export const metadata: Metadata = {
   title: "GivePump - Trade Fees Auto-Donate to Charities",
   description: "Pump for Good. Trade memecoins and auto-donate fees to charities you vote on.",
   icons: {
-    icon: "/pgs.png",
+    icon: [
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    shortcut: "/favicon/favicon.ico",
+    apple: "/favicon/apple-touch-icon.png",
   },
+  manifest: "/favicon/site.webmanifest",
 };
 
 export default function RootLayout({
