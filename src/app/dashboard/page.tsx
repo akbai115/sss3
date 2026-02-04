@@ -143,36 +143,31 @@ export default function Dashboard() {
             return;
         }
 
-        // OPTIMISTIC UPDATE (Update UI immediately)
-        let currentVotes = 0;
-        setProposals(prev => prev.map(p => {
-            if (p.id === id && !p.hasVoted) {
-                const newVotes = p.votes + 1;
-                currentVotes = newVotes;
-                // Simple linear progress calc
-                const newProgress = Math.min((newVotes / p.targetVotes) * 100, 100);
+        // Find the proposal to vote for
+        const proposal = proposals.find(p => p.id === id);
+        if (!proposal || proposal.hasVoted) return;
 
-                // Save to local storage
-                const savedVotes = JSON.parse(localStorage.getItem('user_votes') || '[]');
-                localStorage.setItem('user_votes', JSON.stringify([...savedVotes, id]));
+        const newVotes = proposal.votes + 1;
+        const newProgress = Math.min((newVotes / proposal.targetVotes) * 100, 100);
 
-                return { ...p, votes: newVotes, progress: newProgress, hasVoted: true };
-            }
-            return p;
-        }));
+        // 1. OPTIMISTIC UPDATE (Update UI immediately)
+        setProposals(prev => prev.map(p =>
+            p.id === id ? { ...p, votes: newVotes, progress: newProgress, hasVoted: true } : p
+        ));
 
-        // DB UPDATE (Fire and Forget)
+        // 2. SIDE EFFECTS (Local Storage)
+        const savedVotes = JSON.parse(localStorage.getItem('user_votes') || '[]');
+        if (!savedVotes.includes(id)) {
+            localStorage.setItem('user_votes', JSON.stringify([...savedVotes, id]));
+        }
+
+        // 3. DB UPDATE
         if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
-            console.log("Attempting to update Supabase for ID:", id, "Votes:", currentVotes);
-            // Simple update for demo (might have race conditions but okay for MVP)
-            const { error } = await supabase.from('proposals').update({ votes: currentVotes }).eq('id', id);
+            console.log("Syncing vote to Supabase. ID:", id, "New Total:", newVotes);
+            const { error } = await supabase.from('proposals').update({ votes: newVotes }).eq('id', id);
             if (error) {
-                console.error("Supabase Error:", error);
-            } else {
-                console.log("Supabase Update Success");
+                console.error("Supabase Sync Error:", error);
             }
-        } else {
-            console.warn("No Supabase URL found");
         }
     };
 

@@ -104,9 +104,9 @@ export default function Hero() {
                             <span className="relative z-10">{connected ? 'Go to Dashboard' : 'Vote on Charities'}</span>
                             <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0" />
                         </button>
-                        <a href="https://pump.fun/profile/givepump" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-8 py-4 text-base font-semibold text-zinc-700 transition hover:bg-zinc-50 hover:border-mint-500/50 cursor-pointer shadow-sm">
-                            Buy $GIVE
-                        </a>
+                        <Link href="/submit-request" className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-8 py-4 text-base font-semibold text-zinc-700 transition hover:bg-zinc-50 hover:border-mint-500/50 cursor-pointer shadow-sm">
+                            Ask for Support
+                        </Link>
                     </div>
 
                     {/* How It Works Mini-Flow */}

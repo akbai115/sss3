@@ -38,13 +38,18 @@ export default function Navbar() {
             </Link>
 
             <div className="hidden items-center gap-1 md:flex">
-                {['Vote', 'Dashboard', 'Transparency'].map((item) => (
+                {[
+                    { name: 'Vote', href: '/dashboard' },
+                    { name: 'Dashboard', href: '/dashboard' },
+                    { name: 'Request', href: '/submit-request' },
+                    { name: 'Transparency', href: '/' }
+                ].map((item) => (
                     <Link
-                        key={item}
-                        href="/dashboard"
+                        key={item.name}
+                        href={item.href}
                         className="relative rounded-full px-5 py-2 text-sm font-medium text-zinc-600 transition-all hover:bg-white hover:text-zinc-900 hover:shadow-sm"
                     >
-                        {item}
+                        {item.name}
                     </Link>
                 ))}
             </div>

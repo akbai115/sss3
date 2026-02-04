@@ -4,8 +4,34 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import { motion } from "framer-motion";
 import { Rocket, Zap, Vote, ShieldCheck, BarChart3, CheckCircle2, TrendingUp, Heart } from "lucide-react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Home() {
+  const [totalVotes, setTotalVotes] = useState(0);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return;
+      const { data } = await supabase.from('proposals').select('votes');
+      if (data) {
+        const total = data.reduce((acc, curr) => acc + (curr.votes || 0), 0);
+        setTotalVotes(total);
+      }
+    };
+    fetchStats();
+
+    // Realtime Subscription
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return;
+    const channel = supabase.channel('realtime_landing_stats')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'proposals' }, () => {
+        fetchStats();
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); }
+  }, []);
+
   return (
     <main className="relative min-h-screen bg-white text-zinc-900 selection:bg-mint-500 selection:text-white font-sans overflow-x-hidden">
       <Navbar />
@@ -111,7 +137,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { label: "Proposals Passed", value: "12", icon: CheckCircle2 },
-              { label: "Community Members", value: "5,420+", icon: BarChart3 },
+              { label: "Active Voters", value: totalVotes.toLocaleString(), icon: BarChart3 },
               { label: "Charities Funded", value: "8", icon: Heart }
             ].map((stat, idx) => (
               <div key={idx} className="flex items-center gap-4 p-6 rounded-2xl bg-white border border-zinc-100 shadow-sm">
