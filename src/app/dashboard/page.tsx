@@ -339,15 +339,16 @@ export default function Dashboard() {
                                 {proposals.map((proposal, index) => (
                                     <motion.div
                                         key={proposal.id}
-                                        initial={{ opacity: 0, y: 20 }}
+                                        initial={{ opacity: 0, y: 30 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                                        className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white/40 backdrop-blur-xl p-6 transition-all hover:border-mint-500/50 hover:shadow-lg hover:shadow-mint-500/5"
+                                        whileHover={{ y: -5, scale: 1.01 }}
+                                        transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                                        className="group relative overflow-hidden rounded-[2.5rem] border border-zinc-200 bg-white/60 backdrop-blur-2xl p-8 transition-all hover:border-mint-500/50 hover:shadow-2xl hover:shadow-mint-500/10"
                                     >
-                                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
-                                            <div className="flex gap-4">
-                                                {/* Charity Icon */}
-                                                <div className="relative h-16 w-16 shrink-0 rounded-xl overflow-hidden border border-zinc-100 shadow-sm bg-zinc-50">
+                                        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                                            <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                                                {/* Charity Icon - Bigger and Better */}
+                                                <div className="relative h-24 w-24 shrink-0 rounded-3xl overflow-hidden border-2 border-white shadow-xl bg-zinc-50 group-hover:scale-105 transition-transform duration-500">
                                                     <Image
                                                         src={proposal.imageUrl}
                                                         alt={proposal.title}
@@ -355,68 +356,104 @@ export default function Dashboard() {
                                                         className="object-cover"
                                                     />
                                                 </div>
-                                                <div>
-                                                    <div className="flex items-center gap-2 mb-1">
-                                                        <h3 className="text-xl font-bold text-zinc-900 group-hover:text-mint-600 transition">{proposal.title}</h3>
+                                                <div className="space-y-2">
+                                                    <div className="flex flex-wrap items-center gap-3">
+                                                        <h3 className="text-2xl font-[1000] tracking-tighter text-zinc-900 group-hover:text-mint-600 transition-colors uppercase italic">{proposal.title}</h3>
+                                                        <span className="rounded-full bg-mint-50 px-3 py-1 text-[10px] font-black text-mint-600 border border-mint-100 uppercase tracking-widest">
+                                                            {proposal.type}
+                                                        </span>
+                                                    </div>
+                                                    <p className="text-zinc-500 text-base leading-relaxed max-w-2xl font-medium">{proposal.description}</p>
+                                                    <div className="flex items-center gap-4">
                                                         <a
                                                             href={proposal.link}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="inline-flex items-center justify-center rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-500 hover:bg-zinc-200"
+                                                            className="text-xs font-bold text-zinc-400 hover:text-mint-500 underline underline-offset-4 decoration-zinc-200 transition-colors"
                                                         >
                                                             {new URL(proposal.link).hostname.replace('www.', '')}
                                                         </a>
                                                     </div>
-                                                    <p className="text-zinc-500 text-sm leading-relaxed max-w-2xl">{proposal.description}</p>
                                                 </div>
                                             </div>
-                                            <span className="self-start rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-600 border border-green-500/20 flex items-center gap-1">
-                                                <span className="h-1.5 w-1.5 rounded-full bg-green-500"></span> Active
-                                            </span>
-                                        </div>
 
-                                        <div className="mt-8">
-                                            <div className="flex justify-between text-sm mb-2">
-                                                <span className="text-zinc-600 font-medium">Progress</span>
-                                                <span className="text-mint-600 font-bold">{proposal.progress}%</span>
-                                            </div>
-                                            <div className="h-3 w-full rounded-full bg-zinc-100 overflow-hidden">
-                                                <div
-                                                    className="h-full rounded-full bg-gradient-to-r from-mint-500 to-mint-400 shadow-[0_0_15px_rgba(0,255,204,0.4)] transition-all duration-1000 ease-out"
-                                                    style={{ width: `${proposal.progress}%` }}
-                                                ></div>
-                                            </div>
-                                            <div className="flex justify-between mt-2 text-xs text-zinc-400">
-                                                <span>{proposal.votes.toLocaleString()} Votes</span>
-                                                <span>Target: {proposal.targetVotes.toLocaleString()}</span>
+                                            <div className="hidden lg:block h-12 w-px bg-zinc-100" />
+
+                                            <div className="flex flex-col items-end gap-1">
+                                                <span className="text-[10px] font-black text-zinc-400 uppercase tracking-tighter">Current Status</span>
+                                                <span className="rounded-full bg-green-500/10 px-4 py-1.5 text-xs font-black text-green-600 border border-green-500/20 flex items-center gap-2 uppercase italic">
+                                                    <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span> Active for Vote
+                                                </span>
                                             </div>
                                         </div>
 
-                                        <div className="mt-6 flex justify-end gap-3 pt-4 border-t border-zinc-100">
-                                            <button
-                                                onClick={() => setSelectedProposal(proposal)}
-                                                className="rounded-full px-6 py-2 text-sm font-bold bg-zinc-100 hover:bg-zinc-200 text-zinc-600 transition cursor-pointer"
-                                            >
-                                                Details
-                                            </button>
+                                        <div className="mt-10 p-6 rounded-3xl bg-zinc-50/50 border border-zinc-100">
+                                            <div className="flex justify-between items-end text-sm mb-4">
+                                                <div className="space-y-1">
+                                                    <span className="text-zinc-400 text-[10px] font-black uppercase tracking-widest">Community Backing</span>
+                                                    <p className="text-lg font-black text-zinc-900 leading-none">{proposal.votes.toLocaleString()} <span className="text-zinc-400 font-medium">/ {proposal.targetVotes.toLocaleString()}</span></p>
+                                                </div>
+                                                <div className="text-right space-y-1">
+                                                    <span className="text-zinc-400 text-[10px] font-black uppercase tracking-widest">Target Met</span>
+                                                    <p className="text-2xl font-black text-mint-500 leading-none italic">{proposal.progress}%</p>
+                                                </div>
+                                            </div>
 
-                                            <button
-                                                onClick={() => handleVote(proposal.id)}
-                                                disabled={proposal.hasVoted}
-                                                className={`rounded-full px-6 py-2 text-sm font-bold transition shadow-lg transform active:scale-95 flex items-center gap-2 cursor-pointer
-                                                    ${proposal.hasVoted
-                                                        ? 'bg-zinc-100 text-zinc-400 shadow-none cursor-default'
-                                                        : 'bg-mint-500 text-white hover:bg-mint-400 shadow-mint-500/30'
-                                                    }`}
-                                            >
-                                                {proposal.hasVoted ? (
-                                                    <>
-                                                        <CheckCircle2 className="h-4 w-4" /> Voted
-                                                    </>
-                                                ) : (
-                                                    'Vote Now'
-                                                )}
-                                            </button>
+                                            <div className="relative h-4 w-full rounded-full bg-zinc-100 overflow-hidden p-1 shadow-inner">
+                                                <motion.div
+                                                    initial={{ width: 0 }}
+                                                    animate={{ width: `${proposal.progress}%` }}
+                                                    transition={{ duration: 1.5, ease: "circOut" }}
+                                                    className="h-full rounded-full bg-gradient-to-r from-mint-500 via-mint-400 to-blue-400 shadow-[0_0_20px_rgba(0,255,204,0.5)] relative overflow-hidden"
+                                                >
+                                                    <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.2)_75%,transparent_75%,transparent)] bg-[length:20px_20px] animate-[slide_1s_linear_infinite]" />
+                                                </motion.div>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                                            <div className="flex items-center gap-3">
+                                                <div className="flex -space-x-2">
+                                                    {[1, 2, 3].map((i) => (
+                                                        <div key={i} className="h-8 w-8 rounded-full border-2 border-white bg-zinc-200 flex items-center justify-center text-[10px] font-bold text-zinc-500">
+                                                            P
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                <span className="text-xs font-bold text-zinc-400">Join {Math.floor(proposal.votes / 10)} other donors</span>
+                                            </div>
+
+                                            <div className="flex gap-4 w-full sm:w-auto">
+                                                <button
+                                                    onClick={() => setSelectedProposal(proposal)}
+                                                    className="flex-1 sm:flex-none rounded-2xl px-8 py-4 text-xs font-black uppercase tracking-widest bg-white border border-zinc-200 hover:bg-zinc-50 text-zinc-600 transition-all cursor-pointer shadow-sm active:scale-95"
+                                                >
+                                                    Full Bio
+                                                </button>
+
+                                                <button
+                                                    onClick={() => handleVote(proposal.id)}
+                                                    disabled={proposal.hasVoted}
+                                                    className={`flex-1 sm:flex-none relative overflow-hidden group rounded-2xl px-10 py-4 text-xs font-black uppercase tracking-widest transition-all shadow-xl active:scale-95 flex items-center justify-center gap-2 cursor-pointer
+                                                        ${proposal.hasVoted
+                                                            ? 'bg-zinc-100 text-zinc-400 shadow-none cursor-default'
+                                                            : 'bg-mint-500 text-white hover:bg-mint-400 shadow-mint-500/30'
+                                                        }`}
+                                                >
+                                                    <span className="relative z-10">
+                                                        {proposal.hasVoted ? (
+                                                            <div className="flex items-center gap-2">
+                                                                <CheckCircle2 className="h-4 w-4" /> Voted
+                                                            </div>
+                                                        ) : (
+                                                            'Send Vote'
+                                                        )}
+                                                    </span>
+                                                    {!proposal.hasVoted && (
+                                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full duration-1000 transition-transform" />
+                                                    )}
+                                                </button>
+                                            </div>
                                         </div>
                                     </motion.div>
                                 ))}
