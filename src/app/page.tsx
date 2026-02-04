@@ -30,7 +30,7 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="text-zinc-500 max-w-2xl mx-auto text-lg"
             >
-              We've engineered a sustainable way to fund global causes through the power of meme culture and trading.
+              We've engineered a way to turn viral meme energy into real-world impact using pump.fun's Creator Fee Sharing.
             </motion.p>
           </div>
 
@@ -41,26 +41,26 @@ export default function Home() {
             {[
               {
                 icon: Rocket,
-                title: "Launch & Trade",
-                desc: "Every trade on our platform generates a small 1% fee.",
+                title: "Fair Launch",
+                desc: "$GIVE launched on pump.fun with zero pre-sale and total transparency.",
                 color: "blue"
               },
               {
                 icon: Zap,
-                title: "Fee Collection",
-                desc: "Fees are automatically pooled into a transparent treasury.",
+                title: "Auto-Donation",
+                desc: "100% of the built-in creator fee is sent directly to our community treasury.",
                 color: "amber"
               },
               {
                 icon: Vote,
                 title: "Community Vote",
-                desc: "Holders vote on-chain for the charities they support.",
+                desc: "$GIVE holders vote on-chain for the verified charities they support.",
                 color: "mint"
               },
               {
                 icon: Heart,
-                title: "Verified Impact",
-                desc: "Funds are sent directly to verified charities globally.",
+                title: "Pump Good",
+                desc: "Treasury funds are sent to winners, making every trade a donation.",
                 color: "red"
               }
             ].map((step, idx) => (
@@ -90,8 +90,8 @@ export default function Home() {
             <div className="max-w-xl">
               <h2 className="text-4xl font-black text-zinc-900 mb-6">Real-Time Transparency</h2>
               <p className="text-zinc-500 text-lg">
-                Unlike traditional charity tokens, GivePump's treasury is fully transparent.
-                Every transaction from the fee collection to the final donation is verifiable on the Solana blockchain.
+                Using Solana's low fees and pump.fun's multi-wallet creator fee distribution, every $GIVE trade contributes to the treasury.
+                Everything is verifiable 100% on-chain.
               </p>
             </div>
             <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -102,7 +102,7 @@ export default function Home() {
               </div>
               <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200">
                 <ShieldCheck className="h-6 w-6 text-blue-600 mb-4" />
-                <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">Treasury Balance</p>
+                <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">Donation Treasury</p>
                 <p className="text-3xl font-black text-zinc-900 tracking-tighter">780.5 SOL</p>
               </div>
             </div>

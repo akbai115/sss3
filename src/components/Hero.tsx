@@ -90,9 +90,9 @@ export default function Hero() {
                     </h1>
 
                     <p className="mx-auto max-w-2xl text-lg font-medium text-zinc-600 lg:mx-0 lg:text-xl leading-relaxed">
-                        The first memecoin exchange where <strong>trading is giving</strong>.
+                        The community-driven token where <strong>trading is giving</strong>.
                         <span className="block mt-2 text-zinc-500 text-base font-normal">
-                            Every trade fee is collected in a community wallet. You vote on which charity gets the funds.
+                            Built on pump.fun using 2026 Creator Fee Sharing. A portion of every trade fee is auto-sent to a treasury you control via on-chain voting.
                         </span>
                     </p>
 
@@ -101,12 +101,12 @@ export default function Hero() {
                             onClick={handleConnect}
                             className="group relative flex items-center gap-3 overflow-hidden rounded-full bg-mint-500 px-8 py-4 text-base font-bold text-white transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(0,255,204,0.4)] cursor-pointer"
                         >
-                            <span className="relative z-10">{connected ? 'Go to Dashboard' : 'Connect Wallet'}</span>
+                            <span className="relative z-10">{connected ? 'Go to Dashboard' : 'Vote on Charities'}</span>
                             <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0" />
                         </button>
-                        <Link href="/dashboard" className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-8 py-4 text-base font-semibold text-zinc-700 transition hover:bg-zinc-50 hover:border-mint-500/50 cursor-pointer shadow-sm">
-                            View Proposals
-                        </Link>
+                        <a href="https://pump.fun/profile/givepump" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-8 py-4 text-base font-semibold text-zinc-700 transition hover:bg-zinc-50 hover:border-mint-500/50 cursor-pointer shadow-sm">
+                            Buy $GIVE
+                        </a>
                     </div>
 
                     {/* How It Works Mini-Flow */}

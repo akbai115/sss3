@@ -211,12 +211,14 @@ export default function Dashboard() {
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     {/* Sidebar Stats */}
                     <div className="lg:col-span-1 space-y-6">
-                        <div className="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm">
+                        <div className="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm transition-all hover:border-mint-500/30">
                             <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Your Holdings</p>
                             <p className="text-2xl font-bold mt-2 text-zinc-900">{connected ? "12,500" : "0"} GIVE</p>
                             <div className="mt-4 pt-4 border-t border-zinc-100">
-                                <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Voting Power</p>
-                                <p className="text-xl font-bold text-mint-600 mt-1">{connected ? "12,500" : "0"} Votes</p>
+                                <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Active Voters</p>
+                                <p className="text-xl font-bold text-mint-600 mt-1">
+                                    {proposals.reduce((acc, curr) => acc + curr.votes, 0).toLocaleString()}
+                                </p>
                             </div>
                         </div>
                         {/* Charity Wallet */}
