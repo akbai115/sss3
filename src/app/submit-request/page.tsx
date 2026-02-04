@@ -118,7 +118,7 @@ export default function SubmitRequest() {
                             animate={{ opacity: 1, y: 0 }}
                             className="inline-flex items-center gap-2 rounded-full bg-mint-50 px-4 py-1.5 text-xs font-bold text-mint-600 border border-mint-100 uppercase tracking-widest"
                         >
-                            <Heart size={14} /> Ask for Support
+                            <Heart size={14} /> Request Support
                         </motion.div>
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
