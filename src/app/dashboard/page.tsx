@@ -238,7 +238,7 @@ export default function Dashboard() {
             <Navbar />
             <main className="relative z-10 max-w-7xl mx-auto px-6 py-28 animate-in fade-in duration-700">
                 <div className="flex items-center justify-between mb-8">
-                    <h1 className="text-3xl font-bold tracking-tight">The Giving Hub</h1>
+                    <h1 className="text-3xl font-bold tracking-tight">Lend a Helping Hand</h1>
                     <div className="text-sm text-zinc-500 flex items-center gap-2">
                         {connected && (
                             <>
@@ -311,7 +311,7 @@ export default function Dashboard() {
                                 className="block group"
                             >
                                 <p className="text-sm text-zinc-600 line-clamp-3 group-hover:text-zinc-900 transition-colors">
-                                    "Making real-world impact one trade at a time. Community-led, decentralized, and 100% transparent. Join the movement..."
+                                    "Making real-world impact one trade at a time. Every swap feeds the sharing pool for charities and community dreams. Join the movement..."
                                 </p>
                                 <div className="mt-3 flex items-center gap-2 text-xs text-blue-500 font-bold group-hover:underline">
                                     View on X <Twitter size={10} />

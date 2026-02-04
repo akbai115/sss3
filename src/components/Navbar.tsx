@@ -39,7 +39,7 @@ export default function Navbar() {
 
             <div className="hidden items-center gap-1 md:flex">
                 {[
-                    { name: 'The Hub', href: '/dashboard' },
+                    { name: 'Give Back', href: '/dashboard' },
                     { name: 'Ask', href: '/submit-request' },
                     { name: 'Stats', href: '/' }
                 ].map((item) => (

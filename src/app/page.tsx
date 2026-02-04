@@ -95,7 +95,7 @@ export default function Home() {
               {
                 icon: Zap,
                 title: "The Giving Engine",
-                desc: "Every trade feeds our community pot. This pool is purely for the people—charities, personal needs, or creative projects that need a boost.",
+                desc: "Redirecting official creator fees directly into our community pot. This pool is for the people—supporting charities, creative missions, or anyone needing a helping hand.",
                 color: "amber"
               },
               {
@@ -137,7 +137,7 @@ export default function Home() {
             <div className="max-w-xl">
               <h2 className="text-4xl font-black text-zinc-900 mb-6">Real-Time Transparency</h2>
               <p className="text-zinc-500 text-lg leading-relaxed">
-                Built on the pulse of Solana and the heart of pump.fun. Every single swap keeps the community pot flowing—no middlemen, no gatekeepers, just pure transparent giving. Watch the love move on-chain.
+                Built on the pulse of Solana and the heart of pump.fun. We’ve redirected official creator fees so that every single swap keeps the community pot flowing—no middlemen, no gatekeepers, just pure transparent giving.
               </p>
             </div>
             <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
