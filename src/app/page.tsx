@@ -165,9 +165,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { label: "Proposals Passed", value: "12", icon: CheckCircle2 },
+              { label: "Proposals Passed", value: "0", icon: CheckCircle2 },
               { label: "Active Voters", value: totalVotes.toLocaleString(), icon: BarChart3 },
-              { label: "Charities Funded", value: "8", icon: Heart }
+              { label: "Charities Funded", value: "0", icon: Heart }
             ].map((stat, idx) => (
               <div key={idx} className="flex items-center gap-4 p-6 rounded-2xl bg-white border border-zinc-100 shadow-sm">
                 <div className="h-12 w-12 rounded-full bg-zinc-50 flex items-center justify-center text-zinc-400">
