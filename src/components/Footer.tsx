@@ -39,7 +39,7 @@ export default function Footer() {
                             Follow on X <Twitter className="h-4 w-4 text-blue-400" />
                         </a>
                         <a
-                            href="https://pump.fun"
+                            href="https://pump.fun/profile/givepump"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 rounded-full border border-zinc-100 bg-white px-5 py-2 text-sm font-bold text-zinc-600 hover:border-mint-500/50 hover:text-zinc-900 transition-all shadow-sm"

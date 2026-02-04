@@ -26,14 +26,14 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-2 group">
                 <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/50 shadow-sm transition-transform duration-300 group-hover:scale-110">
                     <Image
-                        src="/de.png"
+                        src="/pgs.png"
                         alt="GivePump Logo"
                         fill
                         className="object-cover"
                     />
                 </div>
-                <span className="text-xl font-bold tracking-tight text-zinc-900 group-hover:text-mint-600 transition-colors">
-                    Give<span className="text-mint-500">Pump</span>
+                <span className="text-xl font-bold tracking-tight text-zinc-900 italic group-hover:text-mint-600 transition-colors uppercase">
+                    GIVE<span className="text-mint-500">PUMP</span>
                 </span>
             </Link>
 
