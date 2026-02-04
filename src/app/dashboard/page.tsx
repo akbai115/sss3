@@ -11,6 +11,7 @@ import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { supabase } from "@/lib/supabaseClient";
 import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { CHARITY_WALLET_ADDRESS, SOL_PRICE_USD, TOKEN_MINT_ADDRESS } from "@/lib/constants";
+import BackgroundModel from "@/components/BackgroundModel";
 
 export default function Dashboard() {
     const [mounted, setMounted] = useState(false);
@@ -232,9 +233,10 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-mint-500 selection:text-white">
+        <div className="min-h-screen bg-white text-zinc-900 font-sans selection:bg-mint-500 selection:text-white relative">
+            <BackgroundModel />
             <Navbar />
-            <main className="max-w-7xl mx-auto px-6 py-28 animate-in fade-in duration-700">
+            <main className="relative z-10 max-w-7xl mx-auto px-6 py-28 animate-in fade-in duration-700">
                 <div className="flex items-center justify-between mb-8">
                     <h1 className="text-3xl font-bold">Voting Dashboard</h1>
                     <div className="text-sm text-zinc-500 flex items-center gap-2">
