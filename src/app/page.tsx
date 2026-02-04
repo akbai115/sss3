@@ -48,7 +48,7 @@ export default function Home() {
               {
                 icon: Zap,
                 title: "Auto-Donation",
-                desc: "100% of the built-in creator fee is sent directly to our community treasury.",
+                desc: "The built-in creator fee is sent directly to our community treasury.",
                 color: "amber"
               },
               {
