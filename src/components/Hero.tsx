@@ -2,12 +2,12 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Heart, Activity, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Heart, Activity, ShieldCheck, ArrowRight, Copy, Check } from 'lucide-react';
 import Heart3D from './Heart3D';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from "react";
 
 import { supabase } from "@/lib/supabaseClient";
@@ -26,6 +26,7 @@ export default function Hero() {
     const [totalVotes, setTotalVotes] = useState(0);
     const [charityBalance, setCharityBalance] = useState<number>(0);
     const [solPrice, setSolPrice] = useState<number>(SOL_PRICE_USD);
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -125,9 +126,41 @@ export default function Hero() {
                             <span className="relative z-10">{connected ? 'Lend a Helping Hand' : 'Join the Vote'}</span>
                             <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-300 group-hover:translate-x-0" />
                         </button>
-                        <Link href="/submit-request" className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-8 py-4 text-base font-semibold text-zinc-700 transition hover:bg-zinc-50 hover:border-mint-500/50 cursor-pointer shadow-sm">
+                        <Link href="/submit-request" className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-8 py-4 text-base font-semibold text-zinc-700 transition hover:bg-zinc-50 hover:border-mint-500/50 cursor-pointer shadow-sm text-center">
                             Apply for Funding
                         </Link>
+                    </div>
+
+                    {/* CA Pill */}
+                    <div className="flex flex-col items-center lg:items-start gap-2 pt-2">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 ml-1">Contract Address</span>
+                        <button
+                            onClick={() => {
+                                navigator.clipboard.writeText("8z3oAbrzteXsRXUC97qKWaBy3BtXvDq3bLDTXssJpump");
+                                setCopied(true);
+                                setTimeout(() => setCopied(false), 2000);
+                            }}
+                            className="group relative flex items-center gap-3 rounded-2xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm font-mono text-zinc-600 transition-all hover:border-mint-500/50 hover:bg-white hover:shadow-sm cursor-pointer"
+                        >
+                            <span className="text-mint-600 font-bold shrink-0">CA:</span>
+                            <span className="truncate max-w-[200px] sm:max-w-none">8z3oAbrzteXsRXUC97qKWaBy3BtXvDq3bLDTXssJpump</span>
+                            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-white border border-zinc-100 group-hover:border-mint-200 group-hover:text-mint-500 transition-colors">
+                                {copied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
+                            </div>
+
+                            <AnimatePresence>
+                                {copied && (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                                        animate={{ opacity: 1, scale: 1, y: -45 }}
+                                        exit={{ opacity: 0, scale: 0.8 }}
+                                        className="absolute left-1/2 -translate-x-1/2 px-3 py-1 bg-zinc-900 text-white text-[10px] font-bold rounded-lg pointer-events-none whitespace-nowrap"
+                                    >
+                                        COPIED!
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </button>
                     </div>
 
                     {/* How It Works Mini-Flow */}
