@@ -8,6 +8,8 @@ import {
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { clusterApiUrl } from "@solana/web3.js";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
+import { SolflareWalletAdapter } from "@solana/wallet-adapter-solflare";
 
 // Default styles that can be overridden by your app
 import "@solana/wallet-adapter-react-ui/styles.css";
@@ -17,17 +19,31 @@ export default function AppWalletProvider({
 }: {
     children: React.ReactNode;
 }) {
-    const network = WalletAdapterNetwork.Devnet;
-    const endpoint = useMemo(() => "https://api.devnet.solana.com", []);
+    const [mounted, setMounted] = React.useState(false);
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
 
+    // Standard clusterApiUrl for Devnet
+    const network = WalletAdapterNetwork.Devnet;
+    const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+
+    // Explicitly add common wallets to ensure they show up in the modal
     const wallets = useMemo(
-        () => [],
-        [network]
+        () => [
+            new PhantomWalletAdapter(),
+            new SolflareWalletAdapter(),
+        ],
+        []
     );
+
+    if (!mounted) {
+        return null;
+    }
 
     return (
         <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets}>
+            <WalletProvider wallets={wallets} autoConnect>
                 <WalletModalProvider>{children}</WalletModalProvider>
             </WalletProvider>
         </ConnectionProvider>
