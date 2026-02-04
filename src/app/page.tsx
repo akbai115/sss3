@@ -146,14 +146,18 @@ export default function Home() {
                 <TrendingUp className="h-6 w-6 text-mint-600 mb-4" />
                 <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">Total Impacted</p>
                 <p className="text-3xl font-black text-zinc-900 tracking-tighter">
-                  ${(charityBalance * solPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  {CHARITY_WALLET_ADDRESS
+                    ? `$${(charityBalance * solPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                    : "Not updated yet"}
                 </p>
               </div>
               <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200">
                 <ShieldCheck className="h-6 w-6 text-blue-600 mb-4" />
                 <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">Donation Treasury</p>
                 <p className="text-3xl font-black text-zinc-900 tracking-tighter">
-                  {charityBalance.toLocaleString()} SOL
+                  {CHARITY_WALLET_ADDRESS
+                    ? `${charityBalance.toLocaleString()} SOL`
+                    : "Not updated yet"}
                 </p>
               </div>
             </div>

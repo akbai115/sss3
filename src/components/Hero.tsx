@@ -194,7 +194,9 @@ export default function Hero() {
                             <div>
                                 <p className="text-xs font-medium text-zinc-500 uppercase tracking-wide">Total Donated</p>
                                 <p className="text-2xl font-black text-zinc-900">
-                                    ${(charityBalance * solPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                    {CHARITY_WALLET_ADDRESS
+                                        ? `$${(charityBalance * solPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                                        : "Not updated yet"}
                                 </p>
                             </div>
                         </div>

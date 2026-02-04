@@ -269,7 +269,11 @@ export default function Dashboard() {
                         <div className="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm transition-all hover:border-mint-500/30">
                             <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Your Holdings</p>
                             <p className="text-2xl font-bold mt-2 text-zinc-900">
-                                {connected ? (isFetchingHoldings ? "..." : userHoldings.toLocaleString()) : "0"} GIVE
+                                {connected ? (
+                                    TOKEN_MINT_ADDRESS
+                                        ? (isFetchingHoldings ? "..." : `${userHoldings.toLocaleString()} GIVE`)
+                                        : "Not updated yet"
+                                ) : "0 GIVE"}
                             </p>
                             <div className="mt-4 pt-4 border-t border-zinc-100">
                                 <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Active Voters</p>
@@ -285,9 +289,11 @@ export default function Dashboard() {
                             </div>
                             <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Charity Wallet</p>
                             <p className="text-2xl font-bold mt-2 text-yellow-500 flex items-center gap-2">
-                                {charityBalance.toLocaleString()} SOL
+                                {CHARITY_WALLET_ADDRESS ? `${charityBalance.toLocaleString()} SOL` : "Not updated yet"}
                             </p>
-                            <p className="text-xs text-zinc-500 mt-1">≈ ${(charityBalance * solPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD</p>
+                            {CHARITY_WALLET_ADDRESS && (
+                                <p className="text-xs text-zinc-500 mt-1">≈ ${(charityBalance * solPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD</p>
+                            )}
                         </div>
                     </div>
 
