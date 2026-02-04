@@ -183,8 +183,12 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between mb-8">
                     <h1 className="text-3xl font-bold">Voting Dashboard</h1>
                     <div className="text-sm text-zinc-500 flex items-center gap-2">
-                        <span className={`h-2 w-2 rounded-full animate-pulse ${connected ? 'bg-mint-500' : 'bg-green-500'}`}></span>
-                        {connected ? "Wallet Connected" : "System Operational"}
+                        {connected && (
+                            <>
+                                <span className="h-2 w-2 rounded-full animate-pulse bg-mint-500"></span>
+                                Wallet Connected
+                            </>
+                        )}
                     </div>
                 </div>
 
