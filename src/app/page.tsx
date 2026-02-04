@@ -1,0 +1,132 @@
+'use client';
+
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import { motion } from "framer-motion";
+import { Rocket, Zap, Vote, ShieldCheck, BarChart3, CheckCircle2, TrendingUp, Heart } from "lucide-react";
+
+export default function Home() {
+  return (
+    <main className="relative min-h-screen bg-white text-zinc-900 selection:bg-mint-500 selection:text-white font-sans overflow-x-hidden">
+      <Navbar />
+      <Hero />
+
+      {/* How It Works / The Cycle */}
+      <section className="relative z-10 py-32 bg-zinc-50/50">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center mb-20">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl font-black text-zinc-900 mb-4"
+            >
+              The GivePump Cycle
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-zinc-500 max-w-2xl mx-auto text-lg"
+            >
+              We've engineered a sustainable way to fund global causes through the power of meme culture and trading.
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative">
+            {/* Connecting Line (Desktop) */}
+            <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-zinc-200 -translate-y-1/2 z-0" />
+
+            {[
+              {
+                icon: Rocket,
+                title: "Launch & Trade",
+                desc: "Every trade on our platform generates a small 1% fee.",
+                color: "blue"
+              },
+              {
+                icon: Zap,
+                title: "Fee Collection",
+                desc: "Fees are automatically pooled into a transparent treasury.",
+                color: "amber"
+              },
+              {
+                icon: Vote,
+                title: "Community Vote",
+                desc: "Holders vote on-chain for the charities they support.",
+                color: "mint"
+              },
+              {
+                icon: Heart,
+                title: "Verified Impact",
+                desc: "Funds are sent directly to verified charities globally.",
+                color: "red"
+              }
+            ].map((step, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.15 }}
+                className="relative flex flex-col items-center text-center group z-10"
+              >
+                <div className={`h-16 w-16 rounded-2xl flex items-center justify-center bg-white border border-zinc-200 shadow-sm mb-6 group-hover:scale-110 group-hover:border-mint-500/50 transition-all duration-300`}>
+                  <step.icon className={`h-8 w-8 ${step.color === 'blue' ? 'text-blue-500' : step.color === 'amber' ? 'text-amber-500' : step.color === 'mint' ? 'text-mint-500' : 'text-red-500'}`} />
+                </div>
+                <h3 className="text-xl font-bold text-zinc-900 mb-2">{step.title}</h3>
+                <p className="text-zinc-500 text-sm leading-relaxed">{step.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Transparency Stats */}
+      <section className="relative z-10 py-32 bg-white border-t border-zinc-100">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12 mb-20">
+            <div className="max-w-xl">
+              <h2 className="text-4xl font-black text-zinc-900 mb-6">Real-Time Transparency</h2>
+              <p className="text-zinc-500 text-lg">
+                Unlike traditional charity tokens, GivePump's treasury is fully transparent.
+                Every transaction from the fee collection to the final donation is verifiable on the Solana blockchain.
+              </p>
+            </div>
+            <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200">
+                <TrendingUp className="h-6 w-6 text-mint-600 mb-4" />
+                <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">Total Impacted</p>
+                <p className="text-3xl font-black text-zinc-900 tracking-tighter">$142,890.00</p>
+              </div>
+              <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200">
+                <ShieldCheck className="h-6 w-6 text-blue-600 mb-4" />
+                <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">Treasury Balance</p>
+                <p className="text-3xl font-black text-zinc-900 tracking-tighter">780.5 SOL</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { label: "Proposals Passed", value: "12", icon: CheckCircle2 },
+              { label: "Community Members", value: "5,420+", icon: BarChart3 },
+              { label: "Charities Funded", value: "8", icon: Heart }
+            ].map((stat, idx) => (
+              <div key={idx} className="flex items-center gap-4 p-6 rounded-2xl bg-white border border-zinc-100 shadow-sm">
+                <div className="h-12 w-12 rounded-full bg-zinc-50 flex items-center justify-center text-zinc-400">
+                  <stat.icon size={20} />
+                </div>
+                <div>
+                  <p className="text-zinc-500 text-xs font-bold uppercase tracking-wider">{stat.label}</p>
+                  <p className="text-xl font-bold text-zinc-900">{stat.value}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
