@@ -6,9 +6,13 @@ import { motion } from "framer-motion";
 import { Rocket, Zap, Vote, ShieldCheck, BarChart3, CheckCircle2, TrendingUp, Heart } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { CHARITY_WALLET_ADDRESS, SOL_PRICE_USD } from "@/lib/constants";
 
 export default function Home() {
   const [totalVotes, setTotalVotes] = useState(0);
+  const [charityBalance, setCharityBalance] = useState<number>(0);
+  const [solPrice, setSolPrice] = useState<number>(SOL_PRICE_USD);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -30,6 +34,23 @@ export default function Home() {
       .subscribe();
 
     return () => { supabase.removeChannel(channel); }
+  }, []);
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      if (!CHARITY_WALLET_ADDRESS) {
+        setCharityBalance(0);
+        return;
+      }
+      try {
+        const connection = new Connection(clusterApiUrl('mainnet-beta'));
+        const balance = await connection.getBalance(new PublicKey(CHARITY_WALLET_ADDRESS));
+        setCharityBalance(balance / LAMPORTS_PER_SOL);
+      } catch (err) {
+        console.error("Failed to fetch balance:", err);
+      }
+    };
+    fetchBalance();
   }, []);
 
   return (
@@ -124,12 +145,16 @@ export default function Home() {
               <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200">
                 <TrendingUp className="h-6 w-6 text-mint-600 mb-4" />
                 <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">Total Impacted</p>
-                <p className="text-3xl font-black text-zinc-900 tracking-tighter">$142,890.00</p>
+                <p className="text-3xl font-black text-zinc-900 tracking-tighter">
+                  ${(charityBalance * solPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
               </div>
               <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200">
                 <ShieldCheck className="h-6 w-6 text-blue-600 mb-4" />
                 <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">Donation Treasury</p>
-                <p className="text-3xl font-black text-zinc-900 tracking-tighter">780.5 SOL</p>
+                <p className="text-3xl font-black text-zinc-900 tracking-tighter">
+                  {charityBalance.toLocaleString()} SOL
+                </p>
               </div>
             </div>
           </div>

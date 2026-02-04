@@ -11,6 +11,8 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from "react";
 
 import { supabase } from "@/lib/supabaseClient";
+import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { CHARITY_WALLET_ADDRESS, SOL_PRICE_USD } from "@/lib/constants";
 
 export default function Hero() {
     const [mounted, setMounted] = useState(false);
@@ -22,6 +24,8 @@ export default function Hero() {
     const { setVisible } = useWalletModal();
     const router = useRouter();
     const [totalVotes, setTotalVotes] = useState(0);
+    const [charityBalance, setCharityBalance] = useState<number>(0);
+    const [solPrice, setSolPrice] = useState<number>(SOL_PRICE_USD);
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -43,6 +47,23 @@ export default function Hero() {
             .subscribe();
 
         return () => { supabase.removeChannel(channel); }
+    }, []);
+
+    useEffect(() => {
+        const fetchBalance = async () => {
+            if (!CHARITY_WALLET_ADDRESS) {
+                setCharityBalance(0);
+                return;
+            }
+            try {
+                const connection = new Connection(clusterApiUrl('mainnet-beta'));
+                const balance = await connection.getBalance(new PublicKey(CHARITY_WALLET_ADDRESS));
+                setCharityBalance(balance / LAMPORTS_PER_SOL);
+            } catch (err) {
+                console.error("Failed to fetch balance:", err);
+            }
+        };
+        fetchBalance();
     }, []);
 
     if (!mounted) return null;
@@ -172,7 +193,9 @@ export default function Hero() {
                             </div>
                             <div>
                                 <p className="text-xs font-medium text-zinc-500 uppercase tracking-wide">Total Donated</p>
-                                <p className="text-2xl font-black text-zinc-900">$142,890.00</p>
+                                <p className="text-2xl font-black text-zinc-900">
+                                    ${(charityBalance * solPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { supabase } from "@/lib/supabaseClient";
+import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { CHARITY_WALLET_ADDRESS, SOL_PRICE_USD } from "@/lib/constants";
 
 export default function Dashboard() {
     const [mounted, setMounted] = useState(false);
@@ -20,6 +22,8 @@ export default function Dashboard() {
     const { setVisible } = useWalletModal();
     const [selectedProposal, setSelectedProposal] = useState<any>(null);
     const [activeTab, setActiveTab] = useState<'proposals' | 'donations'>('proposals');
+    const [charityBalance, setCharityBalance] = useState<number>(0);
+    const [solPrice, setSolPrice] = useState<number>(SOL_PRICE_USD);
 
 
 
@@ -114,6 +118,31 @@ export default function Dashboard() {
             .subscribe();
 
         return () => { supabase.removeChannel(channel); }
+    }, []);
+
+    // FETCH CHARITY WALLET BALANCE
+    useEffect(() => {
+        const fetchBalance = async () => {
+            if (!CHARITY_WALLET_ADDRESS) {
+                setCharityBalance(0);
+                return;
+            }
+
+            try {
+                const connection = new Connection(clusterApiUrl('mainnet-beta'));
+                const balance = await connection.getBalance(new PublicKey(CHARITY_WALLET_ADDRESS));
+                setCharityBalance(balance / LAMPORTS_PER_SOL);
+
+                // Optional: Fetch real SOL price from CoinGecko or Similar
+                // For now use the constant from lib/constants.ts
+            } catch (err) {
+                console.error("Failed to fetch balance:", err);
+            }
+        };
+
+        fetchBalance();
+        const interval = setInterval(fetchBalance, 30000); // Update every 30s
+        return () => clearInterval(interval);
     }, []);
 
     // Load voting state from local storage on mount
@@ -232,9 +261,9 @@ export default function Dashboard() {
                             </div>
                             <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Charity Wallet</p>
                             <p className="text-2xl font-bold mt-2 text-yellow-500 flex items-center gap-2">
-                                780.5 SOL
+                                {charityBalance.toLocaleString()} SOL
                             </p>
-                            <p className="text-xs text-zinc-500 mt-1">≈ $109,240.00 USD</p>
+                            <p className="text-xs text-zinc-500 mt-1">≈ ${(charityBalance * solPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD</p>
                         </div>
                     </div>
 
