@@ -16,7 +16,7 @@ export default function Dashboard() {
         setMounted(true);
     }, []);
 
-    const { connected } = useWallet();
+    const { connected, publicKey } = useWallet();
     const { setVisible } = useWalletModal();
     const [selectedProposal, setSelectedProposal] = useState<any>(null);
     const [activeTab, setActiveTab] = useState<'proposals' | 'donations'>('proposals');
@@ -118,27 +118,34 @@ export default function Dashboard() {
 
     // Load voting state from local storage on mount
 
+    // Load voting state from local storage when wallet changes
     useEffect(() => {
-        const savedVotes = JSON.parse(localStorage.getItem('user_votes') || '[]');
+        // Reset hasVoted first (important when switching wallets)
+        setProposals(prev => prev.map(p => ({ ...p, hasVoted: false })));
+
+        if (!publicKey) return;
+
+        const walletAddress = publicKey.toBase58();
+        const storageKey = `user_votes_${walletAddress}`;
+        const savedVotes = JSON.parse(localStorage.getItem(storageKey) || '[]');
+
         if (savedVotes.length > 0) {
             setProposals(prev => prev.map(p => {
                 if (savedVotes.includes(p.id)) {
                     return {
                         ...p,
-                        hasVoted: true,
-                        votes: p.votes + 1,
-                        progress: Math.min(((p.votes + 1) / p.targetVotes) * 100, 100)
+                        hasVoted: true
                     };
                 }
                 return p;
             }));
         }
-    }, []);
+    }, [publicKey]);
 
     if (!mounted) return null;
 
     const handleVote = async (id: number) => {
-        if (!connected) {
+        if (!connected || !publicKey) {
             setVisible(true);
             return;
         }
@@ -155,10 +162,12 @@ export default function Dashboard() {
             p.id === id ? { ...p, votes: newVotes, progress: newProgress, hasVoted: true } : p
         ));
 
-        // 2. SIDE EFFECTS (Local Storage)
-        const savedVotes = JSON.parse(localStorage.getItem('user_votes') || '[]');
+        // 2. SIDE EFFECTS (Local Storage - Wallet Specific)
+        const walletAddress = publicKey.toBase58();
+        const storageKey = `user_votes_${walletAddress}`;
+        const savedVotes = JSON.parse(localStorage.getItem(storageKey) || '[]');
         if (!savedVotes.includes(id)) {
-            localStorage.setItem('user_votes', JSON.stringify([...savedVotes, id]));
+            localStorage.setItem(storageKey, JSON.stringify([...savedVotes, id]));
         }
 
         // 3. DB UPDATE
