@@ -77,7 +77,7 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="text-zinc-500 max-w-2xl mx-auto text-lg"
             >
-              We've engineered a way to turn viral meme energy into real-world impact using pump.fun's Creator Fee Sharing.
+              We've unlocked a way to turn viral energy into a cycle of giving, powered by the heart of pump.fun.
             </motion.p>
           </div>
 
@@ -94,8 +94,8 @@ export default function Home() {
               },
               {
                 icon: Zap,
-                title: "Impact Generation",
-                desc: "Native protocol rewards are directed into a collective treasury. This capital is reserved for community projects, personal support requests, and verified charities.",
+                title: "The Giving Engine",
+                desc: "Every trade feeds our community pot. This pool is purely for the people—charities, personal needs, or creative projects that need a boost.",
                 color: "amber"
               },
               {
@@ -136,9 +136,8 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 mb-20">
             <div className="max-w-xl">
               <h2 className="text-4xl font-black text-zinc-900 mb-6">Real-Time Transparency</h2>
-              <p className="text-zinc-500 text-lg">
-                Using Solana's low fees and pump.fun's multi-wallet creator fee distribution, every $GIVE trade contributes to the treasury.
-                Everything is verifiable 100% on-chain.
+              <p className="text-zinc-500 text-lg leading-relaxed">
+                Built on the pulse of Solana and the heart of pump.fun. Every single swap keeps the community pot flowing—no middlemen, no gatekeepers, just pure transparent giving. Watch the love move on-chain.
               </p>
             </div>
             <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-4">

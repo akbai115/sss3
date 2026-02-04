@@ -238,7 +238,7 @@ export default function Dashboard() {
             <Navbar />
             <main className="relative z-10 max-w-7xl mx-auto px-6 py-28 animate-in fade-in duration-700">
                 <div className="flex items-center justify-between mb-8">
-                    <h1 className="text-3xl font-bold">Voting Dashboard</h1>
+                    <h1 className="text-3xl font-bold tracking-tight">The Giving Hub</h1>
                     <div className="text-sm text-zinc-500 flex items-center gap-2">
                         {connected && (
                             <>
@@ -255,13 +255,13 @@ export default function Dashboard() {
                         onClick={() => setActiveTab('proposals')}
                         className={`pb-3 text-sm font-bold transition border-b-2 ${activeTab === 'proposals' ? 'text-zinc-900 border-mint-500' : 'text-zinc-400 border-transparent hover:text-zinc-700'}`}
                     >
-                        Active Proposals
+                        Live Causes
                     </button>
                     <button
                         onClick={() => setActiveTab('donations')}
                         className={`pb-3 text-sm font-bold transition border-b-2 ${activeTab === 'donations' ? 'text-zinc-900 border-mint-500' : 'text-zinc-400 border-transparent hover:text-zinc-700'}`}
                     >
-                        Recent Donations
+                        Impact History
                     </button>
                 </div>
 

@@ -113,7 +113,7 @@ export default function Hero() {
                     <p className="mx-auto max-w-2xl text-lg font-medium text-zinc-600 lg:mx-0 lg:text-xl leading-relaxed">
                         The revolution where <strong>trading is giving</strong>.
                         <span className="block mt-2 text-zinc-500 text-base font-normal">
-                            Every swap generates protocol rewards that fuel a community-governed treasury. This balance is reserved for charities, local projects, and personal support requests—anyone can apply, and the community decides who gets funded.
+                            Every trade you make feeds our sharing pool. This is the heart of our community—built for charities, personal dreams, and helping hand requests. You decide where the love goes.
                         </span>
                     </p>
 

@@ -134,7 +134,7 @@ export default function SubmitRequest() {
                             transition={{ delay: 0.2 }}
                             className="text-lg text-zinc-500 max-w-2xl mx-auto leading-relaxed"
                         >
-                            Share your cause with the GivePump community. If approved, your request will enter the voting pool to receive funds generated from $GIVE trading fees.
+                            Got a cause? Need a hand? Share your story with the GivePump circle. If the vibe checks out, you’ll hit the community board where everyone votes to send support straight to your wallet.
                         </motion.p>
                     </div>
 
@@ -150,10 +150,10 @@ export default function SubmitRequest() {
                                 <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-400 mb-6 px-1">How it works</h3>
                                 <div className="space-y-6">
                                     {[
-                                        { icon: Wallet, title: "Connect Wallet", desc: "Requests are tied to your Solana address for security." },
-                                        { icon: Send, title: "Submit Request", desc: "Fill out the details carefully. Proof of need is required." },
-                                        { icon: ShieldCheck, title: "Moderation", desc: "Our team filters for legitimacy and safety." },
-                                        { icon: LayoutList, title: "Community Voting", desc: "$GIVE holders vote to approve your request." }
+                                        { icon: Wallet, title: "Connect Wallet", desc: "Link your Solana address so we know where to send the support." },
+                                        { icon: Send, title: "Share Your Story", desc: "Speak from the heart. Proof of need helps the community trust your cause." },
+                                        { icon: ShieldCheck, title: "The Vibe Check", desc: "Our circle reviews every request for safety and legitimacy." },
+                                        { icon: LayoutList, title: "Community Board", desc: "If approved, you’ll go live for the community to vote on." }
                                     ].map((item, i) => (
                                         <div key={i} className="flex gap-4">
                                             <div className="h-10 w-10 shrink-0 rounded-xl bg-white border border-zinc-200 flex items-center justify-center text-mint-500 shadow-sm">
@@ -195,9 +195,9 @@ export default function SubmitRequest() {
                                         <div className="h-20 w-20 bg-green-50 rounded-full flex items-center justify-center mx-auto text-green-500">
                                             <CheckCircle2 size={48} />
                                         </div>
-                                        <h2 className="text-3xl font-black">Request Submitted!</h2>
+                                        <h2 className="text-3xl font-black">Request Received!</h2>
                                         <p className="text-zinc-500 leading-relaxed max-w-sm mx-auto">
-                                            Your request has been received and is currently in the moderation queue. You will see it on the dashboard once approved for voting.
+                                            Your story is in our hands now. We're performing a quick vibe check to ensure everything is legit—check the dashboard soon to see if you've hit the community board!
                                         </p>
                                         <button
                                             onClick={() => setIsSuccess(false)}
