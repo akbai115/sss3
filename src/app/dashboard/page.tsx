@@ -268,7 +268,7 @@ export default function Dashboard() {
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     {/* Sidebar Stats */}
                     <div className="lg:col-span-1 space-y-6">
-                        <div className="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm transition-all hover:border-mint-500/30">
+                        <div className="p-6 rounded-2xl bg-white/40 backdrop-blur-md border border-zinc-200 shadow-sm transition-all hover:border-mint-500/30">
                             <p className="text-zinc-500 text-xs uppercase tracking-wider font-semibold">Your Holdings</p>
                             <p className="text-2xl font-bold mt-2 text-zinc-900">
                                 {connected ? (
@@ -285,7 +285,7 @@ export default function Dashboard() {
                             </div>
                         </div>
                         {/* Charity Wallet */}
-                        <div className="p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm relative overflow-hidden">
+                        <div className="p-6 rounded-2xl bg-white/40 backdrop-blur-md border border-zinc-200 shadow-sm relative overflow-hidden">
                             <div className="absolute top-0 right-0 p-3 opacity-5">
                                 <Heart size={64} className="text-zinc-900" />
                             </div>
@@ -311,7 +311,7 @@ export default function Dashboard() {
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.5, delay: index * 0.1 }}
-                                        className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white p-6 transition-all hover:border-mint-500/50 hover:shadow-lg hover:shadow-mint-500/5"
+                                        className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-white/40 backdrop-blur-xl p-6 transition-all hover:border-mint-500/50 hover:shadow-lg hover:shadow-mint-500/5"
                                     >
                                         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
                                             <div className="flex gap-4">

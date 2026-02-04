@@ -28,7 +28,7 @@ function Model({ url }: { url: string }) {
 
 export default function BackgroundModel() {
     return (
-        <div className="fixed inset-0 z-0 pointer-events-none opacity-20">
+        <div className="fixed inset-0 z-0 pointer-events-none opacity-70">
             <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
                 <ambientLight intensity={1.5} />
                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} />
