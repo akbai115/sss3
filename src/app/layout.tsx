@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "GivePump - Trade Fees Auto-Donate to Charities",
   description: "Pump for Good. Trade memecoins and auto-donate fees to charities you vote on.",
   icons: {
-    icon: "/de.png",
+    icon: "/pgs.png",
   },
 };
 
