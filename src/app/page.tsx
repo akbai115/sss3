@@ -94,20 +94,20 @@ export default function Home() {
               },
               {
                 icon: Zap,
-                title: "Auto-Donation",
-                desc: "The built-in creator fee is sent directly to our community treasury.",
+                title: "Impact Generation",
+                desc: "Native protocol rewards are directed into a collective treasury. This capital is reserved for community projects, personal support requests, and verified charities.",
                 color: "amber"
               },
               {
                 icon: Vote,
                 title: "Community Vote",
-                desc: "$GIVE holders vote on-chain for the verified charities they support.",
+                desc: "Holders decide exactly where the treasury goes. Any cause can be proposed, and every vote is verifiable on-chain.",
                 color: "mint"
               },
               {
                 icon: Heart,
-                title: "Pump Good",
-                desc: "Treasury funds are sent to winners, making every trade a donation.",
+                title: "Real Impact",
+                desc: "Funds are distributed directly to those in need, transforming every trade into a meaningful act of giving.",
                 color: "red"
               }
             ].map((step, idx) => (

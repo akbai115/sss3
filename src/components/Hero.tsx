@@ -113,7 +113,7 @@ export default function Hero() {
                     <p className="mx-auto max-w-2xl text-lg font-medium text-zinc-600 lg:mx-0 lg:text-xl leading-relaxed">
                         The revolution where <strong>trading is giving</strong>.
                         <span className="block mt-2 text-zinc-500 text-base font-normal">
-                            Leveraging pump.fun's native Fee Sharing, every swap fuels a transparent, community-governed treasury. You trade, you vote, we change lives together.
+                            Every swap generates protocol rewards that fuel a community-governed treasury. This balance is reserved for charities, local projects, and personal support requests—anyone can apply, and the community decides who gets funded.
                         </span>
                     </p>
 
@@ -139,12 +139,12 @@ export default function Hero() {
                         <ArrowRight size={14} className="text-zinc-300" />
                         <div className="flex items-center gap-2">
                             <span className="p-2 rounded-full bg-amber-50 text-amber-500"><Heart size={16} /></span>
-                            <span>Fees Pool</span>
+                            <span>Treasury</span>
                         </div>
                         <ArrowRight size={14} className="text-zinc-300" />
                         <div className="flex items-center gap-2">
                             <span className="p-2 rounded-full bg-mint-50 text-mint-600"><ShieldCheck size={16} /></span>
-                            <span>Charity</span>
+                            <span>Impact</span>
                         </div>
                     </div>
 
